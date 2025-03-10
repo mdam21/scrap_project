@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/and-torr/Documents/git_workspace/scrap_project/.venv
+set -gx VIRTUAL_ENV /home/mdam/Documentos/git_gsky/scrap_project/.venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
