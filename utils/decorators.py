@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from src.browser_manager import iniciar_navegador
+
 def medir_tiempo(func):
     # Decorador que permite calcular el tiempo de demora de una funcion.
     def wrapper(*args, **kwargs):
@@ -30,16 +32,19 @@ def reintentar_scraping(intentos=3, espera=2):
         return wrapper
     return decorator
 
-def cerrar_navegador(func):
+def cerrar_navegador(headless=False):
     # Decorador que cierra el navegador correctamente incluso si existe un error.
-    def wrapper(*args, **kwargs):
-        driver = webdriver.Chrome()
-        try:
-            return func(driver, *args, **kwargs)
-        finally:
-            driver.quit()
-            print("Navegador cerrado correctamente")
-    return wrapper
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            driver = iniciar_navegador(headless=headless)
+            try:
+                return func(driver, *args, **kwargs)
+            finally:
+                driver.quit()
+                print("Navegador cerrado correctamente")
+        return wrapper
+    return decorator
 
 def esperar_elemento(por, valor, tiempo=10):
     # Decorador que permite esperar a que un elemento esté presente en la página.

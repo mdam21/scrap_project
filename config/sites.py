@@ -1,17 +1,18 @@
-SITE_CONFIG = {
-    "CNN": {
-        "title_selector": "h1.article-title",
-        "content_selector": "div.article-content",
-        "max_retries": 5
-    },
-    "BBC": {
-        "title_selector": "h1.story-headline",
-        "content_selector": "div.story-body",
-        "dynamic_load": True  # Ej: Requiere scroll
-    },
-    "el_universo": {
-        "title_selector": "h1",
-        "content_selector": "div.field-items",
-        "dynamic_load": False
-    }
-}
+import json
+from pathlib import Path
+
+CONFIG_PATH = Path(__file__).parent / "sites.json"
+
+def cargar_config():
+    # Funcion que carga las configuraciones de los sitios desde el archivo sites.json
+    # 10-03-2025
+    # mdam
+    try:
+        with open(CONFIG_PATH, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        raise Exception(f"No se encontró el archivo de configuración en {CONFIG_PATH}")
+    except json.JSONDecodeError as e:
+        raise Exception(f"Error al cargar el JSON: {e}")
+
+SITE_CONFIG = cargar_config()

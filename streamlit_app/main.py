@@ -1,23 +1,12 @@
 import streamlit as st
-#from src.scrapers import CNNScraper, BBCScraper  # Importar scrapers
+from src.scrapers.el_universo_scraper import scrape_noticias
 
-st.set_page_config(page_title="News Navigator", layout="wide")
-st.title("🕵️‍♂️ Navegador Inteligente de Noticias")
+st.title("Scraper El Universo 📰")
 
-def main():
-    st.title("News Scraper")
-    site = st.selectbox("Selecciona un sitio", ["CNN", "BBC"])
-    url = st.text_input("URL del artículo")
+query = st.text_input("Buscar noticias en El Universo", "noboa")
 
-    if st.button("Scrapear"):
-        with st.spinner("Procesando..."):
-            if site == "CNN":
-                scraper = CNNScraper(browser_manager)
-            elif site == "BBC":
-                scraper = BBCScraper(browser_manager)
-            
-            article = scraper.extract_article(url)
-            st.json(article)
-
-if __name__ == "__main__":
-    main()
+if st.button("Buscar"):
+    with st.spinner("Buscando noticias..."):
+        html_contenido = scrape_noticias(query=query)
+        st.success("Noticias cargadas correctamente.")
+        st.write(html_contenido[:2000])  # muestra parte del HTML o procesa con BeautifulSoup para mostrar resultados más claros.

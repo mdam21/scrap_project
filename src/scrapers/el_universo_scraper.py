@@ -1,30 +1,28 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# Configurar opciones para Chromium
-chrome_options = Options()
-chrome_options.binary_location = "/snap/bin/chromium"  # Asegurar que usa Chromium en lugar de Google Chrome
-chrome_options.add_argument("--no-sandbox")  # Evita problemas de permisos
-chrome_options.add_argument("--disable-dev-shm-usage")  # Previene errores en memoria compartida
-chrome_options.add_argument("--disable-gpu")  # Desactiva la aceleración por hardware
-chrome_options.add_argument("--remote-debugging-port=9222")  # Permite depuración remota
-chrome_options.add_argument("--disable-background-networking")  # Evita bloqueos de red
-#chrome_options.add_argument("--headless")  # Si quieres ver la ventana, comenta esta línea
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# No necesitas especificar la ruta porque ya está en PATH
-service = Service()
-driver = webdriver.Chrome(service=service, options=chrome_options)
+from utils.decorators import cerrar_navegador
+from config.sites import SITE_CONFIG
 
-driver.get("https://www.eluniverso.com/resultados/?search=noboa") # Esperar a que cargue la pagina 
+@cerrar_navegador(headless=False)
+def scrape_noticias(driver, query="noboa"):
+    url = f"{SITE_CONFIG['el_universo']['url']}/resultados/?search={query}"
+    driver.get(url)
 
+    # Espera explícita para asegurar que la página cargó completamente
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, SITE_CONFIG['el_universo']['content_selector']))
+    )
 
+    html = driver.page_source
+    # Aquí puedes usar BeautifulSoup o cualquier parser para extraer contenido específico.
+    return html
 
-time.sleep(10)
-
-driver.quit()
+if __name__ == "__main__":
+    contenido = scrape_noticias()
+    print(contenido[:500])  # Muestra los primeros 500 caracteres

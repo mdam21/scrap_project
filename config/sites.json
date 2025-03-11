@@ -1,0 +1,14 @@
+{
+    "el_universo": {
+        "url": "https://www.eluniverso.com",
+        "title_selector": "h1",
+        "content_selector": "div.field-items",
+        "dynamic_load": false
+    },
+    "primicias": {
+        "url": "https://www.primicias.ec",
+        "title_selector": "h1",
+        "content_selector": "div.field-items",
+        "dynamic_load": false
+    }
+}
