@@ -10,7 +10,7 @@ from utils.decorators import cerrar_navegador
 from config.sites import SITE_CONFIG
 
 @cerrar_navegador(headless=False)
-def scrape_noticias(driver, query="noboa"):
+def scrape_noticias(driver, query):
     url = f"{SITE_CONFIG['el_universo']['url']}/resultados/?search={query}"
     driver.get(url)
 

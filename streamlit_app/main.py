@@ -1,9 +1,19 @@
 import streamlit as st
+import sys
+from pathlib import Path
+
+# Agregar al path la carpeta src. ademas del path del proyecto para que las importaciones funcionen correctamente.
+project_root_ = '/home/mdam/Documentos/git_gsky/scrap_project'
+sys.path.append(str(project_root_))
+
+# Importamos los scrapers
 from src.scrapers.el_universo_scraper import scrape_noticias
 
-st.title("Scraper El Universo 📰")
 
-query = st.text_input("Buscar noticias en El Universo", "noboa")
+st.title("Scraper de Noticias v0.1")
+
+query = st.text_input("Palabras o frase clave", "Noticias")
+
 
 if st.button("Buscar"):
     with st.spinner("Buscando noticias..."):

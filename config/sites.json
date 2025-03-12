@@ -3,10 +3,17 @@
         "url": "https://www.eluniverso.com",
         "title_selector": "h1",
         "content_selector": "div.field-items",
+        "news_section": "gsc-results-wrapper-nooverlay gsc-results-wrapper-visible",
         "dynamic_load": false
     },
     "primicias": {
         "url": "https://www.primicias.ec",
+        "title_selector": "h1",
+        "content_selector": "div.field-items",
+        "dynamic_load": false
+    },
+    "ecuavisa": {
+        "url": "https://www.ecuavisa.com",
         "title_selector": "h1",
         "content_selector": "div.field-items",
         "dynamic_load": false
