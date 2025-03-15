@@ -12,7 +12,7 @@ from src.scrapers.el_universo_scraper import scrape_noticias
 
 st.title("Scraper de Noticias v0.1")
 
-query = st.text_input("Palabras o frase clave", "Noticias")
+query = st.text_input("Palabras o frase clave", "...")
 
 
 if st.button("Buscar"):

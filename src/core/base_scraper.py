@@ -1,9 +1,9 @@
 from functools import wraps
 from utils.logger import log_execution
-from src.browser_manager import BrowserManager
+from src.browser_manager import iniciar_navegador
 
 class BaseScraper:
-    def __init__(self, browser_manager: BrowserManager):
+    def __init__(self, browser_manager: iniciar_navegador):
         self.browser = browser_manager
 
     @log_execution

@@ -2,6 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
+from config.settings import CHROME_CONFIG
+
+
+print(CHROME_CONFIG)
 def iniciar_navegador(headless=False):
     """
     Inicializa el navegador con opciones predefinidas.

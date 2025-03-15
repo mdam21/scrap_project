@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 from utils.decorators import cerrar_navegador
 from config.sites import SITE_CONFIG
 
@@ -25,4 +26,4 @@ def scrape_noticias(driver, query):
 
 if __name__ == "__main__":
     contenido = scrape_noticias()
-    print(contenido[:500])  # Muestra los primeros 500 caracteres
+    print(contenido[:500])  

@@ -18,3 +18,5 @@ SEARCH_SETTINGS = {
     "base_url": "https://www.eluniverso.com/resultados/?search=",
     "wait_time": 10
 }
+
+print(CHROME_CONFIG)
